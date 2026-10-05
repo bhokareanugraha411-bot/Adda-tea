@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Adda Tea Shop – Miraj</title>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Mukta:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7e8bd;--panel:rgba(255,247,222,.8);--ink:#20301d;--mute:#5b5a3d;--gold:#a85a00;--leaf:#2f6b3a;--btn:#20301d;--btnt:#fff3cf;--line:rgba(32,48,29,.25);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e2620;--panel:rgba(14,38,32,.78);--ink:#f5ecd5;--mute:#b9c2a4;--gold:#f4b323;--leaf:#7fcf8a;--btn:#f4b323;--btnt:#0e2620;--line:rgba(245,236,213,.25)}}
+:root[data-theme="dark"]{--bg:#0e2620;--panel:rgba(14,38,32,.78);--ink:#f5ecd5;--mute:#b9c2a4;--gold:#f4b323;--leaf:#7fcf8a;--btn:#f4b323;--btnt:#0e2620;--line:rgba(245,236,213,.25)}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 18px/1.65 Mukta,system-ui,sans-serif;overflow-x:hidden}
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;transition:opacity .5s}
+main{position:relative;z-index:1}
+h1,h2,h3{font-family:'Rozha One',Georgia,serif;font-weight:400;line-height:1.1;margin:0}
+h2{font-size:clamp(2rem,5vw,3.4rem);margin-bottom:.6em}
+p{max-width:60ch;margin:0 0 1em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:12px 5vw;background:var(--panel);backdrop-filter:blur(8px)}
+nav b{font:400 1.4rem 'Rozha One',serif}
+nav div{display:flex;gap:18px;font-weight:600}
+nav a{text-decoration:none}
+@media(max-width:640px){nav div a:nth-child(n+3){display:none}}
+section{min-height:100vh;padding:14vh 5vw 8vh;display:flex;flex-direction:column;justify-content:center}
+.panel{background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:22px;padding:clamp(20px,4vw,48px);max-width:640px}
+.right{align-self:flex-end}
+#hero{padding-top:18vh}
+#hero h1{font-size:clamp(4.5rem,17vw,12rem);color:var(--gold);animation:rise 1.2s cubic-bezier(.2,.8,.2,1) both}
+#hero h2{font-family:Mukta;font-weight:800;font-size:clamp(1.4rem,4vw,2.4rem);animation:rise 1.2s .25s both;margin:0 0 .4em}
+#hero p{font-size:1.2rem;animation:rise 1.2s .5s both;background:var(--panel);padding:10px 14px;border-radius:12px;backdrop-filter:blur(6px)}
+@keyframes rise{from{opacity:0;transform:translateY(60px) rotateX(40deg)}}
+.btn{display:inline-block;background:var(--btn);color:var(--btnt);padding:14px 26px;border-radius:99px;font-weight:800;text-decoration:none;transition:transform .2s}
+.btn:hover{transform:translateY(-4px) scale(1.04)}
+.hint{margin-top:30px;color:var(--mute);animation:bob 2s infinite}
+@keyframes bob{50%{transform:translateY(10px)}}
+.strip{overflow:hidden;white-space:nowrap;background:var(--gold);color:var(--btnt);padding:14px 0;font:400 1.6rem 'Rozha One',serif;transform:rotate(-1.5deg);position:relative;z-index:1}
+.strip span{display:inline-block;animation:slide 25s linear infinite}
+@keyframes slide{to{transform:translateX(-50%)}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;perspective:900px}
+.card{height:210px;position:relative;transform-style:preserve-3d;transition:transform .5s;cursor:pointer;border:0;background:none;padding:0;font:inherit;color:inherit;text-align:left}
+.card.flip{transform:rotateY(180deg)}
+.card .f,.card .b{position:absolute;inset:0;border-radius:20px;padding:22px;backface-visibility:hidden;display:flex;flex-direction:column;justify-content:flex-end;border:1px solid var(--line)}
+.card .f{background:var(--panel);backdrop-filter:blur(10px)}
+.card .f h3{font-size:1.6rem;color:var(--gold)}
+.card .f small{color:var(--mute)}
+.card .b{background:var(--btn);color:var(--btnt);transform:rotateY(180deg);justify-content:center}
+.tilt{transition:transform .15s}
+.steps{counter-reset:s;display:grid;gap:18px;list-style:none;padding:0;margin:0;max-width:640px}
+.steps li{counter-increment:s;background:var(--panel);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:18px;padding:18px 22px 18px 76px;position:relative;transition:transform .3s}
+.steps li:hover{transform:translateX(12px) rotateY(-6deg)}
+.steps li::before{content:counter(s);position:absolute;left:18px;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:var(--gold);color:var(--btnt);display:grid;place-items:center;font:400 1.4rem 'Rozha One'}
+.steps b{display:block;font-size:1.15rem}
+.moments{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+.moments div{background:var(--panel);backdrop-filter:blur(10px);border-radius:18px;padding:22px;border:1px solid var(--line)}
+.moments h3{font-size:1.4rem;color:var(--leaf);margin-bottom:6px}
+.addr{font-size:1.3rem;font-weight:600;line-height:1.5}
+footer{position:relative;z-index:1;text-align:center;padding:40px 5vw calc(40px + env(safe-area-inset-bottom,0px));background:var(--panel);backdrop-filter:blur(10px);color:var(--mute)}
+footer b{font:400 2rem 'Rozha One',serif;color:var(--gold);display:block}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<nav><b>अड्डा</b><div><a href="#story">Story</a><a href="#menu">Menu</a><a href="#brew">How we brew</a><a href="#visit">Visit</a></div></nav>
+<main>
+<section id="hero">
+  <h1>अड्डा</h1>
+  <h2>Adda Tea Shop</h2>
+  <p>Hot, kadak chai in the heart of Miraj. Come sit, talk, stay a while.</p>
+  <div style="margin-top:22px"><a class="btn" href="#visit">Find the shop</a></div>
+  <div class="hint">Scroll down. The cup follows you.</div>
+</section>
+
+<div class="strip" aria-hidden="true"><span>कडक चहा &nbsp;•&nbsp; Adda Special Chai &nbsp;•&nbsp; Ginger Chai &nbsp;•&nbsp; Elaichi Chai &nbsp;•&nbsp; Bun Maska &nbsp;•&nbsp; Miraj &nbsp;•&nbsp; कडक चहा &nbsp;•&nbsp; Adda Special Chai &nbsp;•&nbsp; Ginger Chai &nbsp;•&nbsp; Elaichi Chai &nbsp;•&nbsp; Bun Maska &nbsp;•&nbsp; Miraj &nbsp;•&nbsp;</span></div>
+
+<section id="story">
+  <div class="panel">
+    <h2>An adda is a place to meet</h2>
+    <p>In Marathi, an adda is where friends gather without a plan. Ours is a small tea shop in Bramhanpuri, Miraj, where the kettle is always on and the chai is made fresh for every cup.</p>
+    <p>Students from the nearby school, neighbours on their evening walk, and people passing by all end up at the same corner. One cup turns into a long conversation.</p>
+  </div>
+</section>
+
+<section id="menu">
+  <h2 style="background:var(--panel);backdrop-filter:blur(10px);padding:12px 20px;border-radius:16px;align-self:flex-start">What we serve</h2>
+  <div class="grid">
+    <button class="card tilt"><span class="f"><h3>Adda Special Chai</h3><small>Tap to flip</small></span><span class="b">Our house cup. Strong tea, fresh milk, and the right amount of sugar.</span></button>
+    <button class="card tilt"><span class="f"><h3>Masala Chai</h3><small>Tap to flip</small></span><span class="b">Brewed with crushed warm spices for a cold morning or a rainy evening.</span></button>
+    <button class="card tilt"><span class="f"><h3>Adrak Chai</h3><small>Tap to flip</small></span><span class="b">Fresh ginger crushed into the pot. Good for a sore throat and a slow day.</span></button>
+    <button class="card tilt"><span class="f"><h3>Elaichi Chai</h3><small>Tap to flip</small></span><span class="b">Cardamom-scented chai with a sweet, soft aroma.</span></button>
+    <button class="card tilt"><span class="f"><h3>Cutting Chai</h3><small>Tap to flip</small></span><span class="b">A small, strong half cup for a quick break.</span></button>
+    <button class="card tilt"><span class="f"><h3>Bun Maska and Biscuits</h3><small>Tap to flip</small></span><span class="b">Soft bun with butter, or crisp biscuits. Made for dipping in chai.</span></button>
+  </div>
+  <p style="margin-top:24px;background:var(--panel);backdrop-filter:blur(10px);padding:10px 16px;border-radius:12px">Ask at the counter for today's items and prices.</p>
+</section>
+
+<section id="brew">
+  <h2 style="background:var(--panel);backdrop-filter:blur(10px);padding:12px 20px;border-radius:16px;align-self:flex-end">How a cup is made</h2>
+  <ol class="steps right" style="align-self:flex-end">
+    <li><b>Boil the water</b>Fresh water, rolling boil.</li>
+    <li><b>Add tea leaves</b>Strong leaves go in and the colour starts to deepen.</li>
+    <li><b>Crush the ginger and spices</b>Ginger and cardamom, pounded fresh.</li>
+    <li><b>Pour in the milk</b>It rises, we lower the flame, and it rises again.</li>
+    <li><b>Strain and serve</b>Poured hot into your cup, straight away.</li>
+  </ol>
+</section>
+
+<section id="moments">
+  <h2 style="background:var(--panel);backdrop-filter:blur(10px);padding:12px 20px;border-radius:16px;align-self:flex-start">Any time is chai time</h2>
+  <div class="moments">
+    <div><h3>Morning</h3>Start the day with a hot cup and the news.</div>
+    <div><h3>After school</h3>A quick snack and a chat with friends.</div>
+    <div><h3>Evening</h3>The best adda hours. Bring your whole group.</div>
+    <div><h3>Rainy days</h3>Masala chai tastes better when it pours.</div>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="panel right">
+    <h2>Come to Adda</h2>
+    <p class="addr">Adda Tea Shop<br>Bramhanpuri, Bhokare Galli,<br>Behind Vidyamandir School,<br>Miraj, Maharashtra 416410</p>
+    <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Bhokare+Galli+Bramhanpuri+Miraj+416410">Open in Google Maps</a>
+  </div>
+</section>
+</main>
+<footer><b>अड्डा</b>Adda Tea Shop, Bramhanpuri, Miraj 416410<br>Made with chai.</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+var calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var cv=document.getElementById('gl');
+// card flip + tilt
+document.querySelectorAll('.card').forEach(function(c){
+  c.addEventListener('click',function(){c.classList.toggle('flip')});
+});
+if(!window.THREE){return}
+var r=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});
+r.setPixelRatio(Math.min(devicePixelRatio,2));
+var sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(40,1,.1,50);cam.position.set(0,2.2,8);cam.lookAt(0,.8,0);
+sc.add(new THREE.AmbientLight(0xffffff,.7));
+var dl=new THREE.DirectionalLight(0xfff0d0,.9);dl.position.set(4,6,5);sc.add(dl);
+var pl=new THREE.PointLight(0xffb347,1,20);pl.position.set(-4,3,3);sc.add(pl);
+var g=new THREE.Group();sc.add(g);
+var V=THREE.Vector2,porc=new THREE.MeshStandardMaterial({color:0xfaf4e6,roughness:.25,side:THREE.DoubleSide});
+var cup=new THREE.Mesh(new THREE.LatheGeometry([new V(0,0),new V(.5,0),new V(.65,.12),new V(.95,.9),new V(1.1,1.5),new V(1.02,1.5),new V(.87,.95),new V(.55,.28),new V(0,.25)],48),porc);g.add(cup);
+var tea=new THREE.Mesh(new THREE.CircleGeometry(.98,48),new THREE.MeshStandardMaterial({color:0xb8651b,roughness:.4}));tea.rotation.x=-Math.PI/2;tea.position.y=1.32;g.add(tea);
+var h=new THREE.Mesh(new THREE.TorusGeometry(.42,.09,16,32),porc);h.position.set(1.15,.95,0);h.scale.set(.85,1.1,1);g.add(h);
+var sau=new THREE.Mesh(new THREE.LatheGeometry([new V(0,-.08),new V(1.4,-.08),new V(1.9,.1),new V(1.95,.14),new V(1.85,.14),new V(1.3,0),new V(0,0)],48),porc);g.add(sau);
+// steam
+var steam=[],sm=new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.3});
+for(var i=0;i<14;i++){var s=new THREE.Mesh(new THREE.SphereGeometry(.16+Math.random()*.12,10,10),sm.clone());s.userData={o:Math.random(),x:(Math.random()-.5)*.8,z:(Math.random()-.5)*.8};g.add(s);steam.push(s)}
+// floating tea leaves
+var leaves=[],lm=new THREE.MeshStandardMaterial({color:0x4f9a54,roughness:.6});
+for(var j=0;j<26;j++){var l=new THREE.Mesh(new THREE.SphereGeometry(.12,8,8),lm);l.scale.set(1.8,.25,.9);l.userData={a:Math.random()*6.28,rad:2.4+Math.random()*2,y:Math.random()*4-.5,sp:.1+Math.random()*.25};sc.add(l);leaves.push(l)}
+function size(){var w=innerWidth,hh=innerHeight;r.setSize(w,hh,false);cam.aspect=w/hh;cam.updateProjectionMatrix()}
+addEventListener('resize',size);size();
+var mx=0,my=0;addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+var t=0;
+function frame(){
+  t+=calm?0:.016;
+  var wide=innerWidth>800,max=document.body.scrollHeight-innerHeight,p=max>0?scrollY/max:0;
+  g.rotation.y=t*.5+scrollY*.004;
+  g.rotation.x=.25+my*.3+Math.sin(p*Math.PI*6)*.35;
+  g.rotation.z=mx*.2;
+  var x=wide?Math.cos(p*Math.PI*5)*2.3:0;
+  g.position.set(x,wide?-.6+Math.sin(t)*.08:1.3+Math.sin(t)*.08,0);
+  g.scale.setScalar(wide?1:.7);
+  cam.position.y=2.2+Math.sin(p*Math.PI*2);
+  cv.style.opacity=wide?1:(scrollY<innerHeight*.7?1:.3);
+  steam.forEach(function(s){var u=(s.userData.o+t*.12)%1;s.position.set(s.userData.x*(1+u),1.5+u*2.2,s.userData.z*(1+u));s.material.opacity=.32*Math.sin(u*Math.PI);s.scale.setScalar(.6+u)});
+  leaves.forEach(function(l){var d=l.userData;d.a+=d.sp*.01;l.position.set(Math.cos(d.a)*d.rad,d.y+Math.sin(t+d.a*3)*.3,Math.sin(d.a)*d.rad-1);l.rotation.set(t+d.a,d.a*2,t*.5)});
+  r.render(sc,cam);requestAnimationFrame(frame)}
+frame();
+})();
+</script>
+</body>
+</html>
